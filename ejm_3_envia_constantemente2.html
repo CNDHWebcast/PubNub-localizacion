@@ -1,0 +1,72 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ENVIA 2 PubNub Connected Car Solution Kit</title>
+</head>
+
+<body>
+    <!-- Include the PubNub Library -->
+    <script src="Scripts/pubnub.min.js"></script>
+
+
+    <!-- Instantiate PubNub -->
+    <script type="text/javascript">
+
+        // Initialize the instance
+
+        var pubnub = PUBNUB.init({
+            publish_key: 'pub-c-f628756e-3c83-4331-884f-f3bc1c4da7c0',
+            subscribe_key: 'sub-c-2a902b72-04f7-11e6-bbd9-02ee2ddab7fe'
+        });
+
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
+        function success(pos) {
+            var crd = pos.coords;
+
+            console.log('Your current position is:');
+            console.log('Latitude : ' + crd.latitude);
+            console.log('Longitude: ' + crd.longitude);
+            console.log('More or less ' + crd.accuracy + ' meters.');
+
+            // Publishing location data
+            pubnub.publish({
+                channel: 'dispositivo2',
+                message: {
+                    vehicle_id: 20,
+                    lat: crd.latitude,
+                    lng: crd.longitude
+                }
+
+            });
+
+        };
+
+        function error(err) {
+            console.warn('ERROR(' + err.code + '): ' + err.message);
+        };
+
+        navigator.geolocation.watchPosition(success, error, options);
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

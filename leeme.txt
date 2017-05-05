@@ -1,0 +1,1 @@
+index.html es el simulador de dispositivo y el gmapExample.htmles el que visualiza la posision del dispositivo,  Ya esta preparado para funcionar con varios dispositivos tiene ya la key tanto de pubnub como de google maps para agregar mas dispositivos se cambia en mapa como en dispositivo el channel
